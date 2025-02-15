@@ -1,4 +1,13 @@
-import { View, Text, TextInput, StyleSheet, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Image,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import React, { useState } from "react";
 import Button from "@/components/Button";
 import Colors from "@/constants/Colors";
@@ -89,46 +98,48 @@ const CreateProductScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Stack.Screen
-        options={{ title: isUpdating ? "Update Product" : "Create Product" }}
-      />
-      <Image
-        source={{
-          uri:
-            image ||
-            "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/6cheese.png",
-        }}
-        style={styles.image}
-      />
-      <Text onPress={pickImageAsync} style={styles.textButton}>
-        Select Image
-      </Text>
-      <Text style={styles.label}>Name</Text>
-      <TextInput
-        value={name}
-        onChangeText={setName}
-        placeholder="Name"
-        style={styles.input}
-      />
-
-      <Text style={styles.label}>Price ($)</Text>
-      <TextInput
-        value={price}
-        onChangeText={setPrice}
-        placeholder="9.99"
-        style={styles.input}
-        keyboardType="numeric"
-      />
-
-      <Text style={{ color: "red" }}>{errors}</Text>
-      <Button onPress={onSubmit} text={isUpdating ? "Update" : "Create"} />
-      {isUpdating && (
-        <Text onPress={confirmDelete} style={styles.textButton}>
-          Delete
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={styles.container}>
+        <Stack.Screen
+          options={{ title: isUpdating ? "Update Product" : "Create Product" }}
+        />
+        <Image
+          source={{
+            uri:
+              image ||
+              "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/food/6cheese.png",
+          }}
+          style={styles.image}
+        />
+        <Text onPress={pickImageAsync} style={styles.textButton}>
+          Select Image
         </Text>
-      )}
-    </View>
+        <Text style={styles.label}>Name</Text>
+        <TextInput
+          value={name}
+          onChangeText={setName}
+          placeholder="Name"
+          style={styles.input}
+        />
+
+        <Text style={styles.label}>Price ($)</Text>
+        <TextInput
+          value={price}
+          onChangeText={setPrice}
+          placeholder="9.99"
+          style={styles.input}
+          keyboardType="numeric"
+        />
+
+        <Text style={{ color: "red" }}>{errors}</Text>
+        <Button onPress={onSubmit} text={isUpdating ? "Update" : "Create"} />
+        {isUpdating && (
+          <Text onPress={confirmDelete} style={styles.textButton}>
+            Delete
+          </Text>
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
