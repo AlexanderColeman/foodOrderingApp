@@ -1,7 +1,7 @@
 import Colors from '@/constants/Colors';
 import { StyleSheet, View, Text, Image, Pressable } from 'react-native';
 import { Product } from '../types';
-import { Link } from 'expo-router';
+import { Link, useSegments } from 'expo-router';
 
 type ProductListItemProps = {
   product: Product;
@@ -9,7 +9,8 @@ type ProductListItemProps = {
 
 const ProductListItem = ({ product }: ProductListItemProps) => {
   return (
-    <Link href={`../menu/${product.id}`} asChild>
+    // realtive path ./ keeps you in admin or user navigation 
+    <Link href={`./menu/${product.id}`} asChild>
       <Pressable style={styles.container}>
         <Image source={{ uri: product.image || "https://via.placeholder.com/150" }} 
               style={styles.image} 
